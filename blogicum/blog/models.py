@@ -9,6 +9,7 @@ class BaseModel(models.Model):
     Абстрактная модель.
     Добавляет к модели дату создания и последнего изменения.
     """
+
     is_published = models.BooleanField(
         default=True,
         blank=False,
@@ -38,8 +39,8 @@ class Category(BaseModel):
         help_text=(
             'Идентификатор страницы для URL; '
             'разрешены символы латиницы, цифры, дефис и подчёркивание.')
-        )
-    
+    )
+  
     class Meta:
         verbose_name = 'категория'
         verbose_name_plural = 'Категории'
@@ -53,11 +54,11 @@ class Location(BaseModel):
         max_length=256,
         blank=False,
         verbose_name='Название места')
-    
+
     class Meta:
         verbose_name = 'местоположение'
         verbose_name_plural = 'Местоположения'
-    
+
     def __str__(self):
         return self.title
 
@@ -71,7 +72,9 @@ class Post(BaseModel):
     pub_date = models.DateTimeField(
         blank=False,
         verbose_name='Дата и время публикации',
-        help_text='Если установить дату и время в будущем — можно делать отложенные публикации.')
+        help_text=(
+            'Если установить дату и время в будущем — можно делать отложенные публикации.')
+    )
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
@@ -93,6 +96,6 @@ class Post(BaseModel):
     class Meta:
         verbose_name = 'публикация'
         verbose_name_plural = 'Публикации'
-   
+
     def __str__(self):
         return self.title
